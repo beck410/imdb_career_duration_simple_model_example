@@ -14,32 +14,32 @@ def get_imdb_dataframe(file_name):
 
 def merge_df_datasets(df_mappings):
     # one for loop instead of three
-title_df_list = [
-    df_mappings[x] for x in df_mappings
-    if 'tconst' in df_mappings[x].columns and 'nconst' not in df_mappings[x].columns
-]
+    title_df_list = [
+        df_mappings[x] for x in df_mappings
+        if 'tconst' in df_mappings[x].columns and 'nconst' not in df_mappings[x].columns
+    ]
 
-main_df_list = [
-    df_mappings[x] for x in df_mappings
-    if 'tconst' in df_mappings[x].columns and 'nconst' in df_mappings[x].columns
-]
+    main_df_list = [
+        df_mappings[x] for x in df_mappings
+        if 'tconst' in df_mappings[x].columns and 'nconst' in df_mappings[x].columns
+    ]
 
-name_df_list = [
-    df_mappings[x] for x in df_mappings
-    if 'nconst' in df_mappings[x].columns and 'tconst' not in df_mappings[x].columns
-]
+    name_df_list = [
+        df_mappings[x] for x in df_mappings
+        if 'nconst' in df_mappings[x].columns and 'tconst' not in df_mappings[x].columns
+    ]
 
-title_df_list.extend(main_df_list)
-print("join title datasets...")
+    title_df_list.extend(main_df_list)
+    print("join title datasets...")
 
-df = reduce(lambda left,right: pd.merge(left,right, on='tconst',
-                                        how='left'), title_df_list)
-print("join title and name datasets...")
-# create list with df + name_df_list
-df = reduce(lambda left,right: pd.merge(left,right,on='nconst',
-                                        how='left'), [df] + name_df_list)
+    df = reduce(lambda left,right: pd.merge(left,right, on='tconst',
+                                            how='left'), title_df_list)
+    print("join title and name datasets...")
+    # create list with df + name_df_list
+    df = reduce(lambda left,right: pd.merge(left,right,on='nconst',
+                                            how='left'), [df] + name_df_list)
 
-df = pd.merge(df,df_mappings['title_akas'],left_on='tconst', right_on='titleId', how='left')
+    df = pd.merge(df,df_mappings['title_akas'],left_on='tconst', right_on='titleId', how='left')
 
 
 def get_final_df_mapping():
@@ -53,9 +53,9 @@ def get_final_df_mapping():
     return imdb_df_mapping
 
 def save_staging_data_to_csv(df):
-print('saving staging data...')
-file_path = '{}/{}.csv'.format(DATASETS_DIR, 'staging_features')
-df.to_csv(file_path)
+    print('saving staging data...')
+    file_path = '{}/{}.csv'.format(DATASETS_DIR, 'staging_features')
+    df.to_csv(file_path)
     print('staging features saved to csv')
 
 def buil_features_dataset(stage_df):

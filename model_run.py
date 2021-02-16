@@ -8,6 +8,7 @@ from career_duration_test_model import (
     build_model,
     test_model
 )
+from download_imdb_datasets import download_datasets
 
 
 def main():

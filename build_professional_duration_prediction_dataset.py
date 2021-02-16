@@ -39,7 +39,7 @@ def merge_df_datasets(df_mappings):
     df = reduce(lambda left,right: pd.merge(left,right,on='nconst',
                                             how='left'), [df] + name_df_list)
 
-    df = pd.merge(df,df_mappings['title_akas'],left_on='tconst', right_on='titleId', how='left')
+    return pd.merge(df,df_mappings['title_akas'],left_on='tconst', right_on='titleId', how='left')
 
 
 def get_final_df_mapping():
@@ -101,7 +101,7 @@ def build_features_dataset(stage_df):
     df['region__size'] = df['region__sum'].apply(lambda x: len(x))
 
     # filter final dataset
-    df = df.loc[df['startYear__max'] != 2021]
+    return df.loc[df['startYear__max'] != 2021]
 
 
 

@@ -58,7 +58,7 @@ def save_staging_data_to_csv(df):
     df.to_csv(file_path)
     print('staging features saved to csv')
 
-def buil_features_dataset(stage_df):
+def build_features_dataset(stage_df):
     # filter data
     df = stage_df.loc[stage_df['averageRating'].notnull()] # remove rows where title has no ratings
     df = df.loc[df['startYear'] != '\\N']

@@ -8,7 +8,7 @@ from constants import (
 )
 
 
-def main():
+def download_datasets():
     for dataset in IMDB_DATASETS:
         file_path = '{}/{}.tsv.gz'.format(DATASETS_DIR, dataset['dataset'])
 
@@ -19,6 +19,3 @@ def _download_url(url, save_path, chunk_size=128):
     response = requests.get(url)
     with open(save_path, "wb") as f:
         f.write(response.content)
-
-if __name__ == "__main__":
-    main()

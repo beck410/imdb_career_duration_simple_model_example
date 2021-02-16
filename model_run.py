@@ -1,6 +1,7 @@
 from build_professional_duration_prediction_dataset import (
     get_final_df_mapping,
-    merge_df_datasets
+    merge_df_datasets,
+    build_features_dataset
 )
 from career_duration_test_model import (
     split_dataset,
@@ -10,6 +11,8 @@ from career_duration_test_model import (
 
 
 def main():
+    # comment out once datasets are downloaded
+    # download_datasets()
     df_mapping = get_final_df_mapping()
     stage_df = merge_df_datasets(df_mapping)
     features_df = build_features_dataset(stage_df)
